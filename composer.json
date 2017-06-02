@@ -1,0 +1,16 @@
+{
+    "name": "p810/tuple",
+    "description": "An implementation of tuples in PHP.",
+    "autoload": {
+        "psr-4": {
+            "p810\\Tuple\\": "src/"
+        },
+        "files": ["src/functions.php"]
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
+    },
+    "require": {
+        "php": ">= 7.0.0"
+    }
+}
