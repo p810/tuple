@@ -11,7 +11,7 @@ use OutOfBoundsException;
 /**
  * Represents an immutable list of values.
  */
-class Tuple implements ArrayAccess, Countable
+final class Tuple implements ArrayAccess, Countable
 {
     /**
      * The number of items in the container.
