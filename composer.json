@@ -5,7 +5,7 @@
         "psr-4": {
             "p810\\Tuple\\": "src/"
         },
-        "files": ["src/functions.php"]
+        "files": ["src/functions.php", "src/black_magic.php"]
     },
     "require-dev": {
         "phpunit/phpunit": "^6.2"
