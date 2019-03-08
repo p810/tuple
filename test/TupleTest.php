@@ -6,44 +6,38 @@ use PHPUnit\Framework\TestCase;
 
 class TupleTest extends TestCase
 {
-    public function testOffsetGet(): Tuple {
+    public function test_tuple_instance_is_created(): Tuple {
         $tuple = tuple('foo', 'bar');
 
-        $this->assertEquals('foo', $tuple[0]);
+        $this->assertInstanceOf(Tuple::class, $tuple);
 
         return $tuple;
     }
 
     /**
-     * @depends testOffsetGet
+     * @depends test_tuple_instance_is_created
      */
-    public function testOffsetCannotBeUpdated(Tuple $tuple): Tuple {
-        try {
-            $tuple[0] = 'baz';
-        } catch (TypeError $e) {
-            $this->assertInstanceOf(TypeError::class, $e);
-        }
+    public function test_tuple_count_is_two(Tuple $tuple) {
+        $this->assertEquals(2, count($tuple));
+    }
+
+    public function test_tuple_is_immutable() {
+        $tuple = tuple('hello');
+
+        $this->expectException(TypeError::class);
+        $this->expectExceptionMessage('Cannot update or add new items to a tuple');
+
+        $tuple[0] = 'baz';
 
         return $tuple;
     }
 
-    /**
-     * @depends testOffsetCannotBeUpdated
-     */
-    public function testOffsetCannotBeRemoved(Tuple $tuple): Tuple {
-        try {
-            unset($tuple[0]);
-        } catch (TypeError $e) {
-            $this->assertInstanceOf(TypeError::class, $e);
-        }
+    public function test_item_cannot_be_removed_from_tuple() {
+        $tuple = tuple('world');
 
-        return $tuple;
-    }
+        $this->expectException(TypeError::class);
+        $this->expectExceptionMessage('Cannot remove items from a tuple');
 
-    /**
-     * @depends testOffsetCannotBeRemoved
-     */
-    public function testTupleSizeIsTwo(Tuple $tuple) {
-        $this->assertEquals(2, $tuple->size());
+        unset($tuple[0]);
     }
 }
