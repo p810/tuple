@@ -11,7 +11,7 @@ namespace p810\Tuple;
  * @todo Look into writing a C extension to give tuples some syntax sugar...
  *
  * @param mixed[] $items
- * @return p810\Tuple\Tuple
+ * @return \p810\Tuple\Tuple
  */
 function tuple(...$items): Tuple {
     return new Tuple(...$items);
