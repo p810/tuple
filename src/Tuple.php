@@ -2,12 +2,16 @@
 
 namespace p810\Tuple;
 
+use Countable;
 use TypeError;
 use ArrayAccess;
 use SplFixedArray;
 use OutOfBoundsException;
 
-class Tuple implements ArrayAccess
+/**
+ * Represents an immutable list of values.
+ */
+class Tuple implements ArrayAccess, Countable
 {
     /**
      * The number of items in the container.
@@ -15,13 +19,11 @@ class Tuple implements ArrayAccess
      */
     protected $size;
 
-
     /**
      * A container for the tuple's elements.
-     * @var SplFixedArray
+     * @var \SplFixedArray
      */
     protected $container;
-
 
     /**
      * Creates an instance of SplFixedArray to hold what's packed into `$items`.
@@ -34,7 +36,6 @@ class Tuple implements ArrayAccess
         $this->container = SplFixedArray::fromArray($items);
     }
 
-
     /**
      * Determines if the index belongs to `Tuple::$container`.
      *
@@ -45,13 +46,12 @@ class Tuple implements ArrayAccess
         return $this->container->offsetExists($offset);
     }
 
-
     /**
      * Returns the value at the index `$offset` in `Tuple::$container`.
      *
-     * @throws OutOfBoundsException if the offset is invalid
      * @param int $offset
      * @return mixed
+     * @throws \OutOfBoundsException if the offset is invalid
      */
     public function offsetGet($offset) {
         if (! $this->offsetExists($offset)) {
@@ -61,31 +61,26 @@ class Tuple implements ArrayAccess
         return $this->container->offsetGet($offset);
     }
 
-
     /**
-     * @throws TypeError since tuples are immutable
+     * @throws \TypeError since tuples are immutable
      * @link http://php.net/manual/en/arrayaccess.offsetset.php
      */
     public function offsetSet($offset, $value): void {
         throw new TypeError('Cannot update or add new items to a tuple');
     }
 
-
     /**
-     * @throws TypeError since tuples are immutable
+     * @throws \TypeError since tuples are immutable
      * @link http://php.net/manual/en/arrayaccess.offsetunset.php
      */
     public function offsetUnset($offset): void {
         throw new TypeError('Cannot remove items from a tuple');
     }
 
-
     /**
-     * Returns the size of `Tuple::$container`.
-     *
-     * @return int
+     * @inheritdoc
      */
-    public function size(): int {
+    public function count(): int {
         return $this->container->getSize();
     }
 }
