@@ -6,7 +6,8 @@ use PHPUnit\Framework\TestCase;
 
 class TupleTest extends TestCase
 {
-    public function test_tuple_instance_is_created(): Tuple {
+    public function test_tuple_instance_is_created(): Tuple
+    {
         $tuple = tuple('foo', 'bar');
 
         $this->assertInstanceOf(Tuple::class, $tuple);
@@ -17,11 +18,13 @@ class TupleTest extends TestCase
     /**
      * @depends test_tuple_instance_is_created
      */
-    public function test_tuple_count_is_two(Tuple $tuple) {
+    public function test_tuple_count_is_two(Tuple $tuple)
+    {
         $this->assertEquals(2, count($tuple));
     }
 
-    public function test_tuple_is_immutable() {
+    public function test_tuple_is_immutable()
+    {
         $tuple = tuple('hello');
 
         $this->expectException(TypeError::class);
@@ -32,7 +35,8 @@ class TupleTest extends TestCase
         return $tuple;
     }
 
-    public function test_item_cannot_be_removed_from_tuple() {
+    public function test_item_cannot_be_removed_from_tuple()
+    {
         $tuple = tuple('world');
 
         $this->expectException(TypeError::class);

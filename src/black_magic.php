@@ -8,6 +8,7 @@ use p810\Tuple\Tuple;
  * @param mixed[] $items
  * @return \p810\Tuple\Tuple
  */
-function 󠀠(...$items): Tuple {
+function 󠀠(...$items): Tuple
+{
     return new Tuple(...$items);
 }

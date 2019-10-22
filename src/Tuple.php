@@ -15,12 +15,14 @@ final class Tuple implements ArrayAccess, Countable
 {
     /**
      * The number of items in the container.
+     * 
      * @var int
      */
     protected $size;
 
     /**
      * A container for the tuple's elements.
+     * 
      * @var \SplFixedArray
      */
     protected $container;
@@ -31,7 +33,8 @@ final class Tuple implements ArrayAccess, Countable
      * @param mixed[] $items
      * @return void
      */
-    function __construct(...$items) {
+    function __construct(...$items)
+    {
         $this->size      = count($items);
         $this->container = SplFixedArray::fromArray($items);
     }
@@ -42,7 +45,8 @@ final class Tuple implements ArrayAccess, Countable
      * @param int $offset
      * @return bool
      */
-    public function offsetExists($offset): bool {
+    public function offsetExists($offset): bool
+    {
         return $this->container->offsetExists($offset);
     }
 
@@ -53,7 +57,8 @@ final class Tuple implements ArrayAccess, Countable
      * @return mixed
      * @throws \OutOfBoundsException if the offset is invalid
      */
-    public function offsetGet($offset) {
+    public function offsetGet($offset)
+    {
         if (! $this->offsetExists($offset)) {
             throw new OutOfBoundsException;
         }
@@ -63,24 +68,27 @@ final class Tuple implements ArrayAccess, Countable
 
     /**
      * @throws \TypeError since tuples are immutable
-     * @link http://php.net/manual/en/arrayaccess.offsetset.php
+     * @see http://php.net/manual/en/arrayaccess.offsetset.php
      */
-    public function offsetSet($offset, $value): void {
+    public function offsetSet($offset, $value): void
+    {
         throw new TypeError('Cannot update or add new items to a tuple');
     }
 
     /**
      * @throws \TypeError since tuples are immutable
-     * @link http://php.net/manual/en/arrayaccess.offsetunset.php
+     * @see http://php.net/manual/en/arrayaccess.offsetunset.php
      */
-    public function offsetUnset($offset): void {
+    public function offsetUnset($offset): void
+    {
         throw new TypeError('Cannot remove items from a tuple');
     }
 
     /**
      * @inheritdoc
      */
-    public function count(): int {
+    public function count(): int
+    {
         return $this->container->getSize();
     }
 }

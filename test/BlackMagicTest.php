@@ -5,7 +5,8 @@ use PHPUnit\Framework\TestCase;
 
 class BlackMagicTest extends TestCase
 {
-    public function test_black_magic_function_returns_tuple_instance() {
+    public function test_black_magic_function_returns_tuple_instance()
+    {
         $tuple = 󠀠('hello world', true, 0, null);
 
         $this->assertInstanceOf(Tuple::class, $tuple);
