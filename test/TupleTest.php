@@ -27,7 +27,7 @@ class TupleTest extends TestCase
     {
         $tuple = tuple('hello');
 
-        $this->expectException(TypeError::class);
+        $this->expectException(LogicException::class);
         $this->expectExceptionMessage('Cannot update or add new items to a tuple');
 
         $tuple[0] = 'baz';
@@ -39,7 +39,7 @@ class TupleTest extends TestCase
     {
         $tuple = tuple('world');
 
-        $this->expectException(TypeError::class);
+        $this->expectException(LogicException::class);
         $this->expectExceptionMessage('Cannot remove items from a tuple');
 
         unset($tuple[0]);
